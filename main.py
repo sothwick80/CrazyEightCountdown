@@ -11,8 +11,8 @@ class Game:
         self.font = pygame.font.Font('trebuc.ttf', 32)
         self.running = True
 
-    #sprite sheets
-    self.deck_spritesheet = WSpritesheet('img/deck.jpg')
+        #sprite sheets
+        self.deck_spritesheet = WSpritesheet('img/deck.jpg')
 
 
 
@@ -25,7 +25,9 @@ class Game:
 
     def events(self):
         for event in pygame.event.get():
-            pass
+            if event.type == pygame.QUIT:
+                self.playing = False
+                self.running = False
 
     def update(self):
         self.all_sprites.update()
