@@ -11,8 +11,13 @@ class Game:
         self.font = pygame.font.Font('trebuc.ttf', 32)
         self.running = True
 
+        #DECKS
+        self.deck = []
+        self.player_one = []
+        self.player_two = []
+
         #sprite sheets
-        self.deck_spritesheet = WSpritesheet('img/deck.jpg')
+        self.deck_spritesheet = BSpritesheet('img/deck.jpg')
 
 
 
@@ -21,6 +26,8 @@ class Game:
 
         # ALL SPRITES TO BE DRAWN MUST GO HERE
         self.all_sprites = pygame.sprite.LayeredUpdates()
+
+        self.deck.append(PlayingCard(self, 10, 10,CLUBS, ACE, DECK))
 
 
     def events(self):
