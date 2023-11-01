@@ -19,7 +19,14 @@ class Game:
         #sprite sheets
         self.deck_spritesheet = BSpritesheet('img/deck.jpg')
 
-
+    def create_deck(self):
+        suits = HEARTS
+        value = ACE
+        while suits < 5:
+            while value < 14:
+                self.deck.append(PlayingCard(self, 10, 10, suits, value, DECK))
+                value += 1
+            suits += 1
 
     def new(self):
         self.playing = True
@@ -27,7 +34,10 @@ class Game:
         # ALL SPRITES TO BE DRAWN MUST GO HERE
         self.all_sprites = pygame.sprite.LayeredUpdates()
 
-        self.deck.append(PlayingCard(self, 10, 10,CLUBS, ACE, DECK))
+        self.create_deck()
+        random.shuffle(self.deck)
+
+        #deal cards
 
 
     def events(self):
