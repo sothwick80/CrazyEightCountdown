@@ -54,7 +54,13 @@ class Game:
             self.player_one_wild -= 1
             dealt = 0
             while dealt < self.player_one_wild:
-                self.player_one.append(self.pu_deck.pop())
+                self.player_one.append(self.pu_deck.pop(1))
+                dealt += 1
+        elif player == 2:
+            self.player_two_wild -= 1
+            dealt = 0
+            while dealt < self.player_two_wild:
+                self.player_two.append(self.pu_deck.pop(1))
                 dealt += 1
 
     def new(self):
@@ -66,17 +72,23 @@ class Game:
         self.create_deck()
         random.shuffle(self.pu_deck)
 
-        #deal cards
+        #deal cards, index 0 is back of card, start with 1
         dealt = 0
         while dealt < 8:
-            self.player_one.append(self.pu_deck.pop())
-            self.player_two.append(self.pu_deck.pop())
+            self.player_one.append(self.pu_deck.pop(1))
+            self.player_two.append(self.pu_deck.pop(1))
             dealt += 1
         
         self.player_one_wild = EIGHT
         self.player_two_wild = EIGHT
 
         #display hands
+        self.pu_deck[0].x = 350
+        self.pu_deck[0].y = 600
+        self.pu_deck[0].rect = self.pu_deck[0].image.get_rect()
+        self.pu_deck[0].rect.x = self.pu_deck[0].x
+        self.pu_deck[0].rect.y = self.pu_deck[0].y
+
         temp = 0
         while temp < 8:
             self.player_one[temp].x = 100
@@ -123,11 +135,12 @@ class Game:
                     i=0
                     while i < self.pu_deck.__len__():
                         #if face down card is clicked
-                        if self.pu_deck[i].rect.collidepoint(mouse_pos) and not self.oncursor:
-                            print ("Picking Up Card from Deck")
-                            self.oncursor = True
-                            pygame.mouse.set_visible(False) 
-                            self.cursor_card = self.pu_deck[i+1]        
+                    #if self.pu_deck[0].rect.collidepoint(mouse_pos):
+                        print ("Picking Up Card from Deck")
+                        self.oncursor = True
+                        pygame.mouse.set_visible(False) 
+                        #POP THIS
+                        self.cursor_card = self.pu_deck[1]        
                         i += 1
                     if self.turn == 1:
                         i=0
