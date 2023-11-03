@@ -34,6 +34,10 @@ class PlayingCard(pygame.sprite.Sprite):
         self.facevalue = v
         self.place = h
 
+        if h == 50:
+            self.name = "Back of Card"
+            self.image = self.game.deck_spritesheet.get_sprite(685, 268, self.width, self.height)
+            
         if s == CLUBS:
             if v == ACE:
                 self.name = "Ace of Clubs"
